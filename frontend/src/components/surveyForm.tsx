@@ -14,6 +14,7 @@ type SurveyFormProps = {
   ) => void;
   handleSubmit: () => Promise<void>;
   handleCancelButtonClick: () => void;
+  formErrors: Record<string, string | null>;
   isSubmiting: boolean;
 };
 
@@ -22,8 +23,21 @@ export const SurveyForm = ({
   handleInputChange,
   handleSubmit,
   handleCancelButtonClick,
-  isSubmiting
+  isSubmiting,
+  formErrors
 }: SurveyFormProps) => {
+  const renderFieldError = (fieldName: string) => {
+    if (!formErrors[fieldName]) {
+      return null;
+    }
+
+    return (
+      <div className={'text-sm text-red-500 block'}>
+        {formErrors[fieldName]}
+      </div>
+    );
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -47,8 +61,9 @@ export const SurveyForm = ({
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </div>
+        {renderFieldError('name')}
       </div>
-      <div className="mt-5">
+      <div className="mt-3">
         <label htmlFor="description" className="block mb-2 text-gray-900">
           Description
         </label>
@@ -62,8 +77,9 @@ export const SurveyForm = ({
           value={formData.description}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
+        {renderFieldError('description')}
       </div>
-      <div className="mt-5">
+      <div className="mt-3">
         <label htmlFor="company" className="block mb-2 text-gray-900">
           Company
         </label>
@@ -78,8 +94,9 @@ export const SurveyForm = ({
           value={formData.company}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
+        {renderFieldError('company')}
       </div>
-      <div className="mt-5 text-right">
+      <div className="mt-3 text-right">
         <Button
           disabled={isSubmiting}
           type="button"

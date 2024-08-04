@@ -11,6 +11,7 @@ _Modal.setAppElement('#__next');
 
 export default function Home() {
   const {
+    surveyFormErrors,
     isSurveyFormModalOpen,
     isLoadingSurveys,
     surveys,
@@ -84,6 +85,7 @@ export default function Home() {
         onRequestClose={closeSurveyFormModal}
       >
         <SurveyForm
+          formErrors={surveyFormErrors}
           isSubmiting={isSubmittingForm}
           handleCancelButtonClick={closeSurveyFormModal}
           formData={surveyFormData}
