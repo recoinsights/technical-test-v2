@@ -1,14 +1,14 @@
 import { SSTConfig } from "sst";
-import { API } from "./stacks/MyStack";
+import { AppStack } from "./stacks/AppStack";
 
 export default {
   config(_input) {
     return {
-      name: "technical-test-v2",
+      name: "reco-technical-test",
       region: "eu-west-2",
     };
   },
   stacks(app) {
-    app.stack(API);
+    app.stack(AppStack);
   }
 } satisfies SSTConfig;

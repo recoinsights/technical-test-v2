@@ -1,14 +1,13 @@
 import { StackContext, Api, NextjsSite } from "sst/constructs";
 
-export function API({ stack }: StackContext) {
+export function AppStack({ stack }: StackContext) {
   const api = new Api(stack, "api", {
     defaults: {
       function: {},
     },
     routes: {
-      "GET /": "backend/functions/src/lambda.handler",
-      "GET /todo": "backend/functions/src/todo.list",
-      "POST /todo": "backend/functions/src/todo.create",
+      "GET /surveys": "backend/functions/src/handlers/survey.findMany",
+      "POST /survey": "backend/functions/src/handlers/survey.createOne",
     },
   });
 

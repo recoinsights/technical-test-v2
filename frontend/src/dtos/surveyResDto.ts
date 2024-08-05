@@ -3,4 +3,6 @@ export type SurveyResDto = {
   name: string;
   description: string | null;
   company: string;
+  createdAt: string;
+  updatedAt: string | null;
 };

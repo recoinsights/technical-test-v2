@@ -9,49 +9,34 @@ const inter = Inter({ subsets: ['latin'] });
 
 _Modal.setAppElement('#__next');
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? `http://localhost:3000`;
+
 /**
  * @note - functions for fetching data or making API requests should be stored/ organised in a separate layer in an ideal setup
  */
-const makeCreateSurveyHttpRequest = async () => {
-  /**
-   * @todo - make API request to the BE
-   */
-  return new Promise<void>((resolve, reject) => {
-    setTimeout(() => {
-      console.log('Survey created successfully');
-      resolve();
-    }, 2000);
+const makeCreateSurveyHttpRequest = async (data: SurveyForm) => {
+  const response = await fetch(`${apiBaseUrl}/survey`, {
+    method: 'POST',
+    body: JSON.stringify(data)
   });
+
+  if (!response.ok) {
+    alert('Unable to create survey');
+  }
 };
 
-const makeGetSurveysHttpRequest = () => {
+const makeGetSurveysHttpRequest = async (): Promise<SurveyResDto[]> => {
   /**
    * @todo - make API request to the BE
    */
-  return new Promise<SurveyResDto[]>((resolve, reject) => {
-    setTimeout(() => {
-      resolve([
-        {
-          id: '1',
-          name: 'Survey 1',
-          description: 'Survey 1 description',
-          company: 'Company 1'
-        },
-        {
-          id: '2',
-          name: 'Survey 2',
-          description: 'Survey 2 description',
-          company: 'Company 2'
-        },
-        {
-          id: '3',
-          name: 'Survey 3',
-          description: 'Survey 3 description',
-          company: 'Company 3'
-        }
-      ]);
-    }, 2000);
-  });
+  const response = await fetch(`${apiBaseUrl}/surveys`);
+
+  if (!response.ok) {
+    alert('Unable to fetch surveys');
+    return [];
+  }
+
+  return response.json();
 };
 
 const defaultSurveyFormState: SurveyForm = {
@@ -127,7 +112,7 @@ export const useHomePage = () => {
     }
     setIsSubmittingForm(true);
     if (currentAction === 'createSurvey') {
-      await makeCreateSurveyHttpRequest();
+      await makeCreateSurveyHttpRequest(surveyFormData);
     }
     setIsSubmittingForm(false);
     closeSurveyFormModal();

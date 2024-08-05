@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  # Replica Set (required for Prisma Client)
+  mongo:
+    build: ./
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbuser
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: 27019
+    ports:
+      - '27019:27019'
