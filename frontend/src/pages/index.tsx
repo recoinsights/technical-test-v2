@@ -45,11 +45,7 @@ const defaultSurveyFormState: SurveyForm = {
   company: ''
 };
 
-/**
- * @note - a custom hook holding the state management/ business logic for the home page - (something like a presenter which returns view model in Model-View-Presenter pattern)
- * @note - also in an ideal setup, this custom hook should be moved to a separate file
- */
-export const useHomePage = () => {
+export default function HomePage() {
   const [currentAction, setCurrentAction] = useState<'createSurvey' | null>(
     null
   );
@@ -62,10 +58,6 @@ export const useHomePage = () => {
   const [surveyFormErrors, setSurveyFormErrors] = useState<
     Record<string, string | null>
   >({});
-
-  const handleCreateSurveyButtonClick = () => {
-    setCurrentAction('createSurvey');
-  };
 
   const closeSurveyFormModal = () => {
     setCurrentAction(null);
@@ -87,7 +79,7 @@ export const useHomePage = () => {
   };
 
   /**
-   * @returns {boolean} - returns true if the form is valid
+   * @returns {boolean} - returns true if the validation passes
    */
   const validateSurveyForm = () => {
     const errors: Record<string, string | null> = {};
@@ -126,41 +118,8 @@ export const useHomePage = () => {
     setIsLoadingSurveys(false);
   };
 
-  return {
-    handleCreateSurveyButtonClick,
-    closeSurveyFormModal,
-    isSurveyFormModalOpen,
-    surveyFormData,
-    handleSurveyFormInputChange,
-    currentAction,
-    submitSurveyForm,
-    isSubmittingForm,
-    updateSurveyList,
-    surveys,
-    isLoadingSurveys,
-    surveyFormErrors
-  };
-};
-
-// =========================== custom hook ends and page component starts here ==================================
-
-export default function HomePage() {
-  const {
-    surveyFormErrors,
-    isSurveyFormModalOpen,
-    isLoadingSurveys,
-    surveys,
-    updateSurveyList,
-    isSubmittingForm,
-    currentAction,
-    submitSurveyForm,
-    surveyFormData,
-    closeSurveyFormModal,
-    handleCreateSurveyButtonClick,
-    handleSurveyFormInputChange
-  } = useHomePage();
-
   useEffect(() => {
+    // fetch the surveys when the page is loaded
     updateSurveyList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -205,7 +164,7 @@ export default function HomePage() {
       </h1>
       <Button
         onClick={() => {
-          handleCreateSurveyButtonClick();
+          setCurrentAction('createSurvey');
         }}
       >
         Create Survey
