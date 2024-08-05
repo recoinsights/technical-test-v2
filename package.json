@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "format": "npm run format --prefix=frontend && npm run format --prefix=backend/functions",
     "be:start": "docker-compose up -d && npm run dev",
-    "fe:start": "npm run dev --prefix=frontend"
+    "fe:start": "npm run dev --prefix=frontend",
+    "test": "npm run test ---prefix=backend/functions"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
