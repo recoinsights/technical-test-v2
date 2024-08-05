@@ -8,7 +8,7 @@ type SaveSurveyData = {
 
 export class SurveyService {
   public findMany = async (): Promise<Survey[]> => {
-    const surveyDocs = await SurveyModel.find({});
+    const surveyDocs = await SurveyModel.find({}).sort({ name: 1 });
     return surveyDocs.map((doc) => doc.toJSON());
   };
 

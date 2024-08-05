@@ -11,6 +11,7 @@ import {
   afterAll
 } from 'vitest';
 import { createOne as createSurveyHandler } from '../src/handlers/survey';
+import { Context, APIGatewayProxyEventV2 } from 'aws-lambda';
 
 const mongoService = getMongoService();
 const notificationService = getNotificationService();
