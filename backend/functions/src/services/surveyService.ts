@@ -12,8 +12,10 @@ export class SurveyService {
     return surveyDocs.map((doc) => doc.toJSON());
   };
 
-  public createOne = async (data: SaveSurveyData) => {
-    await SurveyModel.create(data);
+  public createOne = async (data: SaveSurveyData): Promise<Survey> => {
+    const survey = await SurveyModel.create(data);
+
+    return survey.toJSON();
   };
 }
 
