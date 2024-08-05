@@ -1,4 +1,6 @@
-import { Button } from './button';
+import { Button } from './Button';
+import { TextareaInputField } from './TextareaInputField';
+import { TextInputField } from './TextInputField';
 
 export type SurveyForm = {
   name: string;
@@ -50,15 +52,14 @@ export const SurveyForm = ({
           Name
         </label>
         <div>
-          <input
-            disabled={isSubmiting}
+          <TextInputField
+            name={'name'}
+            placeholder={'Eg. Test survey 1'}
+            value={formData.name}
             onChange={(e) => {
               handleInputChange('name', e.target.value);
             }}
-            type="text"
-            id="name"
-            name={formData.name}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            disabled={isSubmiting}
           />
         </div>
         {renderFieldError('name')}
@@ -67,15 +68,14 @@ export const SurveyForm = ({
         <label htmlFor="description" className="block mb-2 text-gray-900">
           Description
         </label>
-        <textarea
-          disabled={isSubmiting}
+        <TextareaInputField
+          name="description"
+          placeholder="Eg. This is a test survey"
+          value={formData.description}
           onChange={(e) => {
             handleInputChange('description', e.target.value);
           }}
-          id="description"
-          name="description"
-          value={formData.description}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          disabled={isSubmiting}
         />
         {renderFieldError('description')}
       </div>
@@ -83,16 +83,14 @@ export const SurveyForm = ({
         <label htmlFor="company" className="block mb-2 text-gray-900">
           Company
         </label>
-        <input
-          disabled={isSubmiting}
+        <TextareaInputField
+          name="company"
+          placeholder="Eg. Test company"
+          value={formData.company}
           onChange={(e) => {
             handleInputChange('company', e.target.value);
           }}
-          type="text"
-          id="company"
-          name="company"
-          value={formData.company}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          disabled={isSubmiting}
         />
         {renderFieldError('company')}
       </div>
