@@ -26,9 +26,6 @@ const makeCreateSurveyHttpRequest = async (data: SurveyForm) => {
 };
 
 const makeGetSurveysHttpRequest = async (): Promise<SurveyResDto[]> => {
-  /**
-   * @todo - make API request to the BE
-   */
   const response = await fetch(`${apiBaseUrl}/surveys`);
 
   if (!response.ok) {
