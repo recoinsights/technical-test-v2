@@ -12,7 +12,7 @@ This test involves creating a simple CRUD application that displays a list of su
 - Programming Language: `TypeScript` for both backend and front-end
 - Front-End: React (Next.js)
 - Back-End: Serverless Stack (SST) with Lambda functions
-- Database: MongoDB
+- Database: MongoDB (as a Docker container)
 
 ### Running the Project Locally
 
