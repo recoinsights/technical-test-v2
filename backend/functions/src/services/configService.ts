@@ -19,7 +19,7 @@ export class ConfigService {
 
     const config = {
       mongo: {
-        uri: `mongodb://dbuser:password123@localhost:27018/?authSource=admin`,
+        uri: `mongodb://dbuser:password123@localhost:27019/?authSource=admin`,
         dbName: 'reco-technical-test',
         tls: false
       }
